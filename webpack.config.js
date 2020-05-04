@@ -1,6 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+
 const configs = require("./config/webpack");
 
 const CSSLoaders = {
@@ -40,6 +43,11 @@ let config = {
   devServer: {
     contentBase: "./dist",
   },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
 };
 
 module.exports = (env, argv) => {
@@ -49,7 +57,11 @@ module.exports = (env, argv) => {
   config = {
     ...config,
     ...currentConfig,
-    plugins: [...plugins, ...currentConfig.plugins],
+    plugins: [
+      ...plugins,
+      ...currentConfig.plugins,
+      argv.analyze && new BundleAnalyzerPlugin(),
+    ],
     module: { ...loaders, ...currentConfig.loaders },
   };
 
