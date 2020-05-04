@@ -2,9 +2,12 @@
   "name": "jamstack-starter",
   "version": "0.0.1",
   "description": "\"A boilerplate starter for modern JAMStack applications with TypeScript, Jest, Emotion, React, MobX, Storybooks\"",
-  "main": "index.js",
+  "private": true,
   "author": "codewaseem <codewaseem@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "webpack"
+  },
   "devDependencies": {
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
