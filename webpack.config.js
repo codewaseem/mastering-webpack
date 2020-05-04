@@ -5,6 +5,11 @@ const CSSLoaders = {
   use: ["style-loader", "css-loader"],
 };
 
+const ImageFilesLoaders = {
+  test: /\.(png|svg|jpg|gif)$/,
+  use: ["file-loader"],
+};
+
 module.exports = {
   entry: "./src/index.js",
   output: {
@@ -12,6 +17,6 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
   },
   module: {
-    rules: [CSSLoaders],
+    rules: [CSSLoaders, ImageFilesLoaders],
   },
 };

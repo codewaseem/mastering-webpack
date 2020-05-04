@@ -1,5 +1,6 @@
-import globalStyles from "./styles/global.css";
+import "./styles/global.css";
+import logoSvg from "./assets/logos/logo.svg";
 
 console.log("Hello, World");
-
-console.log(globalStyles);
+console.log("You can import styles");
+console.log("You can import image files");
