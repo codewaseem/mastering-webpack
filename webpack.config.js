@@ -37,15 +37,23 @@ let config = {
     print: "./src/print.js",
   },
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].[contenthash].bundle.js",
     path: path.resolve(process.cwd(), "dist"),
   },
   devServer: {
     contentBase: "./dist",
   },
   optimization: {
+    moduleIds: "hashed",
+    runtimeChunk: "single",
     splitChunks: {
-      chunks: "all",
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
     },
   },
 };
@@ -57,13 +65,13 @@ module.exports = (env, argv) => {
   config = {
     ...config,
     ...currentConfig,
-    plugins: [
-      ...plugins,
-      ...currentConfig.plugins,
-      argv.analyze && new BundleAnalyzerPlugin(),
-    ],
+    plugins: [...plugins, ...currentConfig.plugins],
     module: { ...loaders, ...currentConfig.loaders },
   };
+
+  if (argv.analyze == "true") {
+    config.plugins.push(new BundleAnalyzerPlugin());
+  }
 
   return config;
 };
