@@ -10,6 +10,11 @@ const ImageFilesLoaders = {
   use: ["file-loader"],
 };
 
+const FontLoaders = {
+  test: /\.(woff|woff2|eot|ttf|otf)$/,
+  use: ["file-loader"],
+};
+
 module.exports = {
   entry: "./src/index.js",
   output: {
@@ -17,6 +22,6 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
   },
   module: {
-    rules: [CSSLoaders, ImageFilesLoaders],
+    rules: [CSSLoaders, ImageFilesLoaders, FontLoaders],
   },
 };
