@@ -1,38 +1,12 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const devConfig = require("./config/webpack/development.config");
+const prodConfig = require("./config/webpack/production.config");
 
-const CSSLoaders = {
-  test: /\.css$/,
-  use: ["style-loader", "css-loader"],
-};
+module.exports = (env, argv) => {
+  if (argv.mode === "development") {
+    return devConfig;
+  }
 
-const ImageFilesLoaders = {
-  test: /\.(png|svg|jpg|gif)$/,
-  use: ["file-loader"],
-};
-
-const FontLoaders = {
-  test: /\.(woff|woff2|eot|ttf|otf)$/,
-  use: ["file-loader"],
-};
-
-module.exports = {
-  entry: {
-    app: "./src/index.js",
-    print: "./src/print.js",
-  },
-  output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: "Output Management",
-    }),
-  ],
-  module: {
-    rules: [CSSLoaders, ImageFilesLoaders, FontLoaders],
-  },
+  if (argv.mode === "production") {
+    return prodConfig;
+  }
 };

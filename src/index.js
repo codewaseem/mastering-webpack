@@ -8,3 +8,5 @@ console.log("You can import styles");
 console.log("You can import image files");
 console.log("You can import fonts");
 console.log("You can also import data files like CSV, XML, JSON(built-in)");
+
+printMe();
